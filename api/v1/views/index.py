@@ -2,7 +2,7 @@
 """Define routes"""
 from flask import jsonify
 from api.v1.views import app_views
-from.. import storage
+from models import storage
 
 
 @app_views.route('/status', methods=['GET'])
