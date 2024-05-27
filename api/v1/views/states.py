@@ -22,9 +22,21 @@ def get_states():
 def get_state(state_id):
     """Retrieves a State object"""
     state = storage.get(State, state_id)
-    if state is None:
+    if not state:
         abort(404)
     return jsonify(state.to_dict())
+
+
+@app_views.route('/api/v1/states/<state_id>', methods=['DELETE'],
+                 strict_slashes=False)
+def delete_state(state_id):
+    """deletes State object"""
+    state = storage.get(State, state_id)
+    if not state:
+        abort(404)
+    storage.delete(state)
+    storage.save()
+    return make_response(jsonify({}), 200)
 
 
 @app_views.route('/api/v1/states/', methods=['POST'], strict_slashes=False)
@@ -45,7 +57,7 @@ def post_state():
 def update_state(state_id):
     """updates a State object"""
     state = storage.get(State, state_id)
-    if state is None:
+    if not state:
         abort(404)
     data = request.get_json()
     if not data:
@@ -55,15 +67,3 @@ def update_state(state_id):
             setattr(state, key, value)
     storage.save()
     return make_response(jsonify(state.to_dict()), 200)
-
-
-@app_views.route('/api/v1/states/<state_id>', methods=['DELETE'],
-                 strict_slashes=False)
-def delete_state(state_id):
-    """deletes State object"""
-    state = storage.get(State, state_id)
-    if state is None:
-        abort(404)
-    storage.delete(state)
-    storage.save()
-    return make_response(jsonify({}), 200)
