@@ -5,3 +5,4 @@ app_views = Blueprint('app_views', __name__)
 app_views.url_prefix = '/api/v1'
 from.index import *
 from.states import *
+from.cities import *
