@@ -3,11 +3,11 @@
 new view for City objects that handles all default RESTful
 API actions
 """
-from flask import jsonify, abort, make_response, request
 from models.city import City
 from models.state import State
 from models import storage
 from api.v1.views import app_views
+from flask import abort, jsonify, make_response, request
 
 
 @app_views.route('/api/v1/states/<state_id>/cities', methods=['GET'],
