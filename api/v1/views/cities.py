@@ -10,7 +10,7 @@ from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 
 
-@app_views.route('/api/v1/states/<state_id>/cities', methods=['GET'],
+@app_views.route('/states/<state_id>/cities', methods=['GET'],
                  strict_slashes=False)
 def get_cities(state_id):
     """retrieves list of all city objects"""
@@ -23,7 +23,7 @@ def get_cities(state_id):
     return jsonify(city_list)
 
 
-@app_views.route('/api/v1/cities/<city_id>', methods=['GET'],
+@app_views.route('/cities/<city_id>', methods=['GET'],
                  strict_slashes=False)
 def get_city(city_id):
     """Retrieves a City object"""
@@ -33,7 +33,7 @@ def get_city(city_id):
     return jsonify(city.to_dict())
 
 
-@app_views.route('/api/v1/cities/<city_id>', methods=['DELETE'],
+@app_views.route('/cities/<city_id>', methods=['DELETE'],
                  strict_slashes=False)
 def delete_city(city_id):
     """deletes city object"""
@@ -45,7 +45,7 @@ def delete_city(city_id):
     return make_response(jsonify({}), 200)
 
 
-@app_views.route('/api/v1/states/<state_id>/cities', methods=['POST'],
+@app_views.route('/states/<state_id>/cities', methods=['POST'],
                  strict_slashes=False)
 def post_city(state_id):
     """creates a City object"""
@@ -63,7 +63,7 @@ def post_city(state_id):
     return make_response(jsonify(new_city.to_dict()), 201)
 
 
-@app_views.route('/api/v1/cities/<city_id>', methods=['PUT'],
+@app_views.route('/cities/<city_id>', methods=['PUT'],
                  strict_slashes=False)
 def update_city(city_id):
     """updates a City object"""
