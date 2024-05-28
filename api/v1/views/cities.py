@@ -76,7 +76,7 @@ def update_city(city_id):
     ignore = ['id', 'state_id', 'created_at', 'updated_at']
     data = request.get_json()
     for key, value in data.items():
-        if key != not in ignore:
+        if key not in ignore:
             setattr(city, key, value)
     storage.save()
     return make_response(jsonify(city.to_dict()), 200)
